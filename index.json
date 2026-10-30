@@ -5,14 +5,14 @@
     {
       "id": "secondhome",
       "name": "SecondHome",
-      "version": "0.1.0",
-      "description": "Cargador experimental de un userland Alpine sobre el kernel compartido de Android.",
-      "url": "plugins/secondhome/secondhome-0.1.0.lplugin",
+      "version": "0.1.1",
+      "description": "Cargador experimental de un userland Alpine sobre el kernel compartido de Android, ejecutando loader y BusyBox desde rutas reales.",
+      "url": "plugins/secondhome/secondhome-0.1.1.lplugin",
       "license": "MIT",
       "architectures": [
         "arm64-v8a"
       ],
-      "sha256": "abedf07f0c30d68abb1393293a0ccf090342921a774b3c0dcdc52979678b3e3e"
+      "sha256": "c8cbe6b9e5fe9e75e37f9e1c25239bed8834a1e2e627192852347cd460f48508"
     },
     {
       "id": "termuxbridge",

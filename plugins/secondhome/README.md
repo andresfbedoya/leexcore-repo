@@ -1,10 +1,10 @@
-# SecondHome 0.1.0
+# SecondHome 0.1.1
 
 Primer cargador experimental de LeexDroid para arrancar un userland Alpine dentro de LeexCore.
 
 ## Qué hace
 
-SecondHome ejecuta el loader musl y BusyBox del rootfs Alpine usando el kernel Linux de Android. No es una máquina virtual, no usa Termux y esta versión todavía no implementa traducción global de rutas, chroot ni PRoot.
+SecondHome ejecuta el loader musl y BusyBox del rootfs Alpine usando el kernel Linux de Android. El loader y BusyBox se ejecutan desde sus rutas reales del rootfs; no usa `memfd`. No es una máquina virtual, no usa Termux y esta versión todavía no implementa traducción global de rutas, chroot ni PRoot.
 
 ## Uso previsto
 

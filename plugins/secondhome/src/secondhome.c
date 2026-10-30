@@ -6,22 +6,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fcntl.h>
-#include <sys/syscall.h>
 #include <sys/stat.h>
-
-static int memfd_copy(const char *path, const char *name) {
-    int fd = (int)syscall(__NR_memfd_create, name, 0);
-    if (fd < 0) return -1;
-    int in = open(path, O_RDONLY);
-    if (in < 0) { close(fd); return -1; }
-    char b[8192]; ssize_t n;
-    while ((n = read(in, b, sizeof(b))) > 0) {
-        ssize_t at = 0;
-        while (at < n) { ssize_t w = write(fd, b + at, (size_t)(n - at)); if (w < 0) { close(in); close(fd); return -1; } at += w; }
-    }
-    close(in);
-    return n < 0 ? (close(fd), -1) : fd;
-}
 
 static const char *loader_name(void) {
 #if defined(__aarch64__)
@@ -44,7 +29,7 @@ int main(int argc, char **argv) {
     }
     const char *loader_rel = loader_name();
     if (!loader_rel) { fprintf(stderr, "Arquitectura no soportada\n"); return 65; }
-    char root[PATH_MAX], loader[PATH_MAX], busybox[PATH_MAX], home[PATH_MAX], path[PATH_MAX], libs[PATH_MAX], busybox_mem[64], loader_mem[64];
+    char root[PATH_MAX], loader[PATH_MAX], busybox[PATH_MAX], home[PATH_MAX], path[PATH_MAX], libs[PATH_MAX];
     if (!realpath(argv[1], root)) { perror("ROOTFS"); return 66; }
     snprintf(loader, sizeof(loader), "%s/%s", root, loader_rel);
     snprintf(busybox, sizeof(busybox), "%s/bin/busybox", root);
@@ -61,18 +46,13 @@ int main(int argc, char **argv) {
     setenv("TERM", "xterm-256color", 1);
     setenv("SECONDHOME_ROOT", root, 1);
     if (chdir(home) != 0) { perror("home"); return 68; }
-    int loader_fd = memfd_copy(loader, "secondhome-musl-loader");
-    int busybox_fd = memfd_copy(busybox, "secondhome-busybox");
-    if (loader_fd < 0 || busybox_fd < 0) { fprintf(stderr, "No pude cargar Alpine en memoria: %s\n", strerror(errno)); return 70; }
-    snprintf(loader_mem, sizeof(loader_mem), "/proc/self/fd/%d", loader_fd);
-    snprintf(busybox_mem, sizeof(busybox_mem), "/proc/self/fd/%d", busybox_fd);
     char **child = calloc((size_t)argc + 2, sizeof(char *));
     if (!child) return 69;
-    child[0] = loader_mem;
-    child[1] = busybox_mem;
+    child[0] = loader;
+    child[1] = busybox;
     if (argc == 2) { child[2] = "sh"; child[3] = "-i"; }
     else { for (int i = 2; i < argc; i++) child[i] = argv[i]; }
-    execv(loader_mem, child);
+    execv(loader, child);
     fprintf(stderr, "No pude iniciar SecondHome: %s\n", strerror(errno));
     return 127;
 }

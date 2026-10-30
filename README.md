@@ -6,7 +6,9 @@ Repositorio público de plugins y accesorios para LeexCore.
 
 Arrastra el contenido de esta carpeta al repositorio `leexcore-repo` desde **Add file → Upload files** y confirma con un commit.
 
-El catálogo está en `index.json`. El primer plugin es `SecondHome`, un cargador experimental de Alpine Linux sobre el kernel compartido de Android.
+El catálogo está en `index.json`. El plugin `SecondHome` ejecuta un userland Alpine Linux sobre el kernel compartido de Android. La versión 0.1.1 ejecuta el loader musl y BusyBox desde rutas reales, sin la capa intermedia `memfd`.
+
+El repositorio también incluye `TermuxBridge` y el paquete `Neofetch for LeexCore`.
 
 ## Licencias
 
