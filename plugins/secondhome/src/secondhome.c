@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     }
     const char *loader_rel = loader_name();
     if (!loader_rel) { fprintf(stderr, "Arquitectura no soportada\n"); return 65; }
-    char root[PATH_MAX], loader[PATH_MAX], busybox[PATH_MAX], home[PATH_MAX];
+    char root[PATH_MAX], loader[PATH_MAX], busybox[PATH_MAX], home[PATH_MAX], path[PATH_MAX], libs[PATH_MAX];
     if (!realpath(argv[1], root)) { perror("ROOTFS"); return 66; }
     snprintf(loader, sizeof(loader), "%s/%s", root, loader_rel);
     snprintf(busybox, sizeof(busybox), "%s/bin/busybox", root);
@@ -38,8 +38,10 @@ int main(int argc, char **argv) {
     }
     mkdir(home, 0755);
     setenv("HOME", home, 1);
-    setenv("PATH", "/bin:/sbin:/usr/bin:/usr/sbin", 1);
-    setenv("LD_LIBRARY_PATH", "/lib:/usr/lib", 1);
+    snprintf(path, sizeof(path), "%s/bin:%s/sbin:%s/usr/bin:%s/usr/sbin", root, root, root, root);
+    snprintf(libs, sizeof(libs), "%s/lib:%s/usr/lib", root, root);
+    setenv("PATH", path, 1);
+    setenv("LD_LIBRARY_PATH", libs, 1);
     setenv("PS1", "~ $ ", 1);
     setenv("TERM", "xterm-256color", 1);
     setenv("SECONDHOME_ROOT", root, 1);
