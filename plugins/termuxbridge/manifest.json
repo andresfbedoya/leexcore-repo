@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "termuxbridge",
+  "name": "TermuxBridge",
+  "version": "0.1.0",
+  "description": "Integra LeexCore con Termux instalado usando su interfaz pública RUN_COMMAND.",
+  "author": "Andres Bedoya / LeexDroid",
+  "license": "MIT",
+  "minLeexCore": "1.0.0",
+  "architectures": ["all"],
+  "commands": ["termux"]
+}

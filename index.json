@@ -9,8 +9,22 @@
       "description": "Cargador experimental de un userland Alpine sobre el kernel compartido de Android.",
       "url": "plugins/secondhome/secondhome-0.1.0.lplugin",
       "license": "MIT",
-      "architectures": ["arm64-v8a"],
+      "architectures": [
+        "arm64-v8a"
+      ],
       "sha256": "f9b9a7d939f1bce993549d525df597740df24c3a192b618a983fe75fa3bb4d3f"
+    },
+    {
+      "id": "termuxbridge",
+      "name": "TermuxBridge",
+      "version": "0.1.0",
+      "description": "Integra LeexCore con Termux instalado usando RUN_COMMAND.",
+      "url": "plugins/termuxbridge/termuxbridge-0.1.0.lplugin",
+      "license": "MIT",
+      "architectures": [
+        "all"
+      ],
+      "sha256": "94dd01c9b1c76eb40ba5c101dc793283608cb22e4718cfa46376f2dfed780006"
     }
   ]
 }
