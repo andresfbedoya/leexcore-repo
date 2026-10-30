@@ -26,5 +26,19 @@
       ],
       "sha256": "94dd01c9b1c76eb40ba5c101dc793283608cb22e4718cfa46376f2dfed780006"
     }
+  ],
+  "packages": [
+    {
+      "id": "neofetch",
+      "name": "Neofetch for LeexCore",
+      "version": "1.0.0",
+      "description": "Resumen visual de Android, dispositivo, kernel, ABI y memoria disponible.",
+      "url": "packages/neofetch/neofetch-1.0.0.lpkg",
+      "license": "MIT",
+      "architectures": [
+        "all"
+      ],
+      "sha256": "71ce547275b26836f1b7ba35f49bc454c7a8c2a85fdb97858501beb9db1e0a9e"
+    }
   ]
 }

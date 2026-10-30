@@ -1,0 +1,9 @@
+{
+  "id": "neofetch",
+  "name": "Neofetch for LeexCore",
+  "version": "1.0.0",
+  "description": "Resumen visual de Android, dispositivo, kernel, ABI y memoria disponible.",
+  "license": "MIT",
+  "commands": ["neofetch"],
+  "architectures": ["all"]
+}

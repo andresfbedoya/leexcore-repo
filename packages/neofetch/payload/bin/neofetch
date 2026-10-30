@@ -1,0 +1,32 @@
+#!/system/bin/sh
+
+ESC='\033['
+RESET="${ESC}0m"
+CYAN="${ESC}36m"
+BLUE="${ESC}34m"
+WHITE="${ESC}97m"
+GRAY="${ESC}90m"
+
+prop() { getprop "$1" 2>/dev/null; }
+
+NAME="$(prop ro.product.model)"
+BRAND="$(prop ro.product.brand)"
+ANDROID="$(prop ro.build.version.release)"
+SDK="$(prop ro.build.version.sdk)"
+ABI="$(prop ro.product.cpu.abi)"
+KERNEL="$(uname -sr 2>/dev/null)"
+TOTAL_KB="$(grep '^MemTotal:' /proc/meminfo 2>/dev/null | sed 's/[^0-9]//g')"
+AVAIL_KB="$(grep '^MemAvailable:' /proc/meminfo 2>/dev/null | sed 's/[^0-9]//g')"
+[ -z "$AVAIL_KB" ] && AVAIL_KB="$(grep '^MemFree:' /proc/meminfo 2>/dev/null | sed 's/[^0-9]//g')"
+TOTAL_MB=$((TOTAL_KB / 1024))
+AVAIL_MB=$((AVAIL_KB / 1024))
+
+printf '\n'
+printf "%b       %b%s%b\n" "$CYAN" "$WHITE" "LeexCore" "$RESET"
+printf "%b       %b   .--.      %bOS:       Android %s (SDK %s)%b\n" "$CYAN" "$CYAN" "$WHITE" "$ANDROID" "$SDK" "$RESET"
+printf "%b       %b  |o_o |     %bDevice:   %s %s%b\n" "$CYAN" "$CYAN" "$WHITE" "$BRAND" "$NAME" "$RESET"
+printf "%b       %b  |:_/ |     %bKernel:   %s%b\n" "$CYAN" "$CYAN" "$WHITE" "$KERNEL" "$RESET"
+printf "%b       %b //   \\ \\   %bABI:      %s%b\n" "$CYAN" "$CYAN" "$WHITE" "$ABI" "$RESET"
+printf "%b       %b(|     | )  %bRAM:      %s MiB / %s MiB disponible%b\n" "$CYAN" "$CYAN" "$WHITE" "$AVAIL_MB" "$TOTAL_MB" "$RESET"
+printf "%b       %b/'\\_   _/\\  %bRuntime:  LeexCore LPKG%b\n" "$CYAN" "$CYAN" "$WHITE" "$RESET"
+printf "%b       %b\\___)=(___/  %b%b%b\n\n" "$CYAN" "$CYAN" "$GRAY" "----------------" "$RESET"
