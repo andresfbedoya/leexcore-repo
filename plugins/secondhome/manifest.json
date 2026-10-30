@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "id": "secondhome",
+  "name": "SecondHome",
+  "version": "0.1.0",
+  "description": "Cargador experimental de un userland Alpine sobre el kernel compartido de Android.",
+  "author": "Andres Bedoya / LeexDroid",
+  "license": "MIT",
+  "minLeexCore": "1.0.0",
+  "architectures": ["arm64-v8a"],
+  "entrypoint": "bin/$ABI/secondhome",
+  "rootfs": "rootfs/alpine-aarch64-minirootfs-3.20.3.tar.gz",
+  "commands": ["secondhome"]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "repository": "LeexCore Official Plugins",
+  "plugins": [
+    {
+      "id": "secondhome",
+      "name": "SecondHome",
+      "version": "0.1.0",
+      "description": "Cargador experimental de un userland Alpine sobre el kernel compartido de Android.",
+      "url": "plugins/secondhome/secondhome-0.1.0.lplugin",
+      "license": "MIT",
+      "architectures": ["arm64-v8a"],
+      "sha256": "dcdb72a32662b4d802330151b5ee7dbd4737c2e5236edf89131758c471185a6a"
+    }
+  ]
+}
